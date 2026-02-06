@@ -371,3 +371,17 @@ static ptrdiff_t pmd_to_offset (const void *this_ptr, const PMD *pmd)
     offset += pmd->mdisp;
     return offset;
 }
+
+extern "C" __cdecl PVOID __RTtypeid (PVOID objptr) throw (...)
+{
+    if (objptr == nullptr) {
+        throw std::bad_typeid();
+    }
+
+    __try {
+        const RTTICompleteObjectLocator *objlocator = getobjlocator(objptr);
+        return static_cast<void *>(objlocator->pTypeDescriptor);
+    } __except (GetExceptionCode() == EXCEPTION_ACCESS_VIOLATION ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        throw std::__non_rtti_object::__construct_from_string_literal("Access violation - no RTTI data!");
+    }
+}
