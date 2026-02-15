@@ -27,9 +27,8 @@ public:
 
     const char *name () const noexcept
     {
-        // FIXME: return human-readable name
-        assert(false);
-        return NULL;
+        // For now return raw_name until we have something better
+        return raw_name();
     }
 
     const char *raw_name () const noexcept
