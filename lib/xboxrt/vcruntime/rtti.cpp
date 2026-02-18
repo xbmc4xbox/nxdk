@@ -293,7 +293,10 @@ const RTTIBaseClassDescriptor *get_target_type_mi (const RTTICompleteObjectLocat
 
 const RTTIBaseClassDescriptor *get_target_type_vi (const RTTICompleteObjectLocator *obj_locator, const TypeDescriptor *source_type, const TypeDescriptor *target_type)
 {
-    assert(0);
+    // Virtual inheritance uses the same algorithm as multiple inheritance,
+    // since the MSVC RTTI structure already encodes virtual inheritance information
+    // in the base class descriptors and attributes
+    return get_target_type_mi(obj_locator, source_type, target_type);
 }
 
 
@@ -328,8 +331,6 @@ extern "C" __cdecl PVOID __RTDynamicCast (PVOID inptr, LONG VfDelta, PVOID SrcTy
         } else {
             // Virtual inheritance
             new_type = get_target_type_vi(objlocator, src_type, target_type);
-            assert(0);
-            // FIXME
         }
 
 
