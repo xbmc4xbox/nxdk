@@ -7,6 +7,7 @@ ZLIB_SRCS = $(ZLIB_DIR)/adler32.c \
             $(ZLIB_DIR)/inflate.c \
             $(ZLIB_DIR)/inftrees.c \
             $(ZLIB_DIR)/trees.c \
+            $(ZLIB_DIR)/uncompr.c \
             $(ZLIB_DIR)/zutil.c
 
 ZLIB_OBJS = $(addsuffix .obj, $(basename $(ZLIB_SRCS)))
