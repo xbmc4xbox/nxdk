@@ -215,11 +215,6 @@ const RTTIBaseClassDescriptor *get_target_type_mi (const RTTICompleteObjectLocat
         const RTTIBaseClassDescriptor *bcd_candidate = obj_locator->pClassDescriptor->pBaseClassArray->arrayOfBaseClassDescriptors[i];
         const TypeDescriptor *td_candidate = bcd_candidate->pTypeDescriptor;
 
-        debugPrint("Class: %s\n", td_candidate->name);
-        //if (td_candidate == target_type) {
-            debugPrint("contained Bases: %d\n", bcd_candidate->numContainedBases);
-        //}
-
         // Trick to skip RTTI checks for base classes in the list that are
         // bases of the target
         if (i - target_index > target_num_bases) {
@@ -317,7 +312,6 @@ extern "C" __cdecl PVOID __RTDynamicCast (PVOID inptr, LONG VfDelta, PVOID SrcTy
         const RTTIBaseClassDescriptor *new_type;
         const RTTICompleteObjectLocator *objlocator = getobjlocator(inptr);
         const DWORD inheritance_attributes = objlocator->pClassDescriptor->attributes;
-        debugPrint("attributes %lu\n", inheritance_attributes);
 
         const TypeDescriptor *src_type = reinterpret_cast<TypeDescriptor *>(SrcType);
         const TypeDescriptor *target_type = reinterpret_cast<TypeDescriptor *>(TargetType);
