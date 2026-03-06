@@ -308,6 +308,10 @@ static ptrdiff_t pmd_to_offset (const void *this_ptr, const PMD *pmd);
 */
 extern "C" __cdecl PVOID __RTDynamicCast (PVOID inptr, LONG VfDelta, PVOID SrcType, PVOID TargetType, BOOL isReference) throw (...)
 {
+    if (inptr == nullptr) {
+        return nullptr;
+    }
+
     __try {
         const RTTIBaseClassDescriptor *new_type;
         const RTTICompleteObjectLocator *objlocator = getobjlocator(inptr);
