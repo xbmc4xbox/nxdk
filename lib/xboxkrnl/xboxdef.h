@@ -27,7 +27,7 @@ typedef long long LONGLONG, *PLONGLONG;
 typedef unsigned char BYTE;
 typedef unsigned char UCHAR, *PUCHAR;
 typedef unsigned short USHORT, *PUSHORT, CSHORT;
-typedef unsigned short WORD, WCHAR, *PWSTR;
+typedef unsigned short WORD, WCHAR, *LPWSTR, *PWSTR;
 typedef unsigned int UINT, *PUINT, *LPUINT;
 typedef unsigned long DWORD, *PDWORD, *LPDWORD;
 typedef unsigned long ULONG, *PULONG;
