@@ -1,5 +1,6 @@
 ZLIB_DIR = $(NXDK_DIR)/lib/zlib/zlib
-ZLIB_SRCS = $(ZLIB_DIR)/adler32.c \
+ZLIB_SRCS = $(ZLIB_DIR)/compress.c \
+            $(ZLIB_DIR)/adler32.c \
             $(ZLIB_DIR)/crc32.c \
             $(ZLIB_DIR)/deflate.c \
             $(ZLIB_DIR)/infback.c \
