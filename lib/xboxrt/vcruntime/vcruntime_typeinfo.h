@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-// SPDX-FileCopyrightText: 2019-2020 Stefan Schmidt
+// SPDX-FileCopyrightText: 2019-2024 Stefan Schmidt
 
 #ifndef __VCRUNTIME_TYPEINFO_H__
 #define __VCRUNTIME_TYPEINFO_H__
@@ -27,9 +27,8 @@ public:
 
     const char *name () const noexcept
     {
-        // FIXME: return human-readable name
-        assert(false);
-        return NULL;
+        // For now return raw_name until we have something better
+        return raw_name();
     }
 
     const char *raw_name () const noexcept
@@ -84,6 +83,24 @@ namespace std
     {
     public:
         bad_typeid () noexcept : exception("bad typeid", 0)
+        {
+        }
+    private:
+        friend class __non_rtti_object;
+
+        bad_typeid (const char *const _Message, [[maybe_unused]] int) noexcept : exception(_Message, 0)
+        {
+        }
+    };
+
+    class __non_rtti_object : public bad_typeid {
+    public:
+        static __non_rtti_object __construct_from_string_literal (const char *const _Message) noexcept
+        {
+            return __non_rtti_object(_Message, 0);
+        }
+    private:
+        __non_rtti_object (const char *const _Message, [[maybe_unused]] int) noexcept : bad_typeid(_Message, 0)
         {
         }
     };
